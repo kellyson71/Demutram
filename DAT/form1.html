@@ -415,6 +415,8 @@ nav ul li a img {
                 const formData = new FormData(form);
                 const formObject = {};
 
+                formObject['relation'] = document.getElementById('relation').value;
+
                 formData.forEach((value, key) => {
                     formObject[key] = value;
                 });
