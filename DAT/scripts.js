@@ -23,3 +23,16 @@ function validateForm() {
 document.addEventListener('DOMContentLoaded', () => {
     toggleForeignFields();
 });
+
+function verificarSessao() {
+    if (sessionStorage.length === 0) {
+        alert("Sessão expirada");
+        
+        window.location.href = "index.html";
+    }
+}
+
+window.onload = verificarSessao;
+
+
+
