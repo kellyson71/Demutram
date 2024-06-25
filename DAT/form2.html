@@ -288,7 +288,7 @@
     </ul>
     
     <div  id="formDataDisplay" class="container" style="margin-top: 50px;">
-        <form action="#" method="post">
+        <form id="main-vehicle-form" action="#" method="post">
             <h3>VEÍCULO PRINCIPAL</h3>
             
             <label for="situacao">Situação do Veículo: <span>*</span></label>
@@ -418,7 +418,7 @@
     </div>
     <div id="formDataDisplay" class="container">
         <h2><i class="fas fa-user"></i> Formulário do Condutor</h2>
-        <form action="#" method="post">
+        <form id="driver-form" action="#" method="post">
             <label for="nao_habilitado">Não Habilitado?</label>
             <input type="checkbox" id="nao_habilitado" name="nao_habilitado" onchange="toggleHabilitacao()">
             
@@ -502,129 +502,68 @@
             <label for="uf_endereco">UF:</label>
             <input type="text" id="uf_endereco" name="uf_endereco">
 
+            </div>
+
+    
+
+            <div class="container">
+                <h2 class="damage-title">Danos no Veículo</h2>
+        
+                <div class="damage-checkbox">
+                    <input type="checkbox" id="seguranca_checkbox" name="seguranca_checkbox" onchange="toggleDamageContainer()">
+                    <label for="seguranca_checkbox" class="checkbox-label">Houve danos ao sistema de segurança, freios, direção ou de suspensão do veículo?</label>
+                </div>
+                
+                <div class="damage-container" id="damageContainer">
+                    <div class="damage-button" onclick="toggleSelected(1)">Dianteira Direita</div>
+                    <div class="damage-button" onclick="toggleSelected(2)">Dianteira Esquerda</div>
+                    <div class="damage-button" onclick="toggleSelected(3)">Lateral/Teto Direito</div>
+                    <div class="damage-button" onclick="toggleSelected(4)">Lateral/Teto Esquerdo</div>
+                    <div class="damage-button" onclick="toggleSelected(5)">Traseira Direita</div>
+                    <div class="damage-button" onclick="toggleSelected(6)">Traseira Esquerda</div>
+                </div>
+            </div>
+
+                
+        
+            <div class="cargo-damage-container">
+                <h2>Danos na Carga do Veículo</h2>
+                <div class="form-group">
+                    <input type="checkbox" id="carga_checkbox" name="carga_checkbox">
+                    <label for="carga_checkbox" class="checkbox-label">Houve danos na carga do veículo?</label>
+                </div>
+                <div class="form-group">
+                    <label for="notas_fiscais" class="form-label">Nº das Notas Fiscais, Manifestos ou Equivalentes:</label>
+                    <input type="text" id="notas_fiscais" name="notas_fiscais" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="tipo_mercadoria" class="form-label">Tipo de Mercadoria:</label>
+                    <input type="text" id="tipo_mercadoria" name="tipo_mercadoria" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="valor_total" class="form-label">Valor Total:</label>
+                    <input type="text" id="valor_total" name="valor_total" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="extensao_danos" class="form-label">Extensão estimada dos danos da carga:</label>
+                    <input type="text" id="extensao_danos" name="extensao_danos" disabled>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="seguro_checkbox" name="seguro_checkbox">
+                    <label for="seguro_checkbox" class="checkbox-label">Tem seguro?</label>
+                </div>
+                <div class="form-group">
+                    <label for="seguradora" class="form-label">Informe a Seguradora:</label>
+                    <input type="text" id="seguradora" name="seguradora" disabled>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="window.location.href = 'form1.html'">voltar</button>
+                    <button type="button" onclick="saveFormData()">Enviar</button>
+                </div>
+
+            </div>
         </form>
-    </div>
-    <script>
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const estrangeiroCheckbox = document.getElementById('estrangeiro');
-        //     const documentoEstrangeiro = document.getElementById('documento_estrangeiro');
-        //     toggleEstrangeiro(estrangeiroCheckbox, documentoEstrangeiro);
-
-        //     estrangeiroCheckbox.addEventListener('change', function() {
-        //         toggleEstrangeiro(estrangeiroCheckbox, documentoEstrangeiro);
-        //     });
-
-        //     const documentoEstrangeiro2 = document.getElementById('documento_estrangeiro2');
-        //     toggleEstrangeiro(estrangeiroCheckbox2, documentoEstrangeiro2);
-
-        //     estrangeiroCheckbox2.addEventListener('change', function() {
-        //         toggleEstrangeiro(estrangeiroCheckbox2, documentoEstrangeiro2);
-        //     });
-        // });
-
-        // function toggleEstrangeiro(checkbox, documento) {
-        //     if (checkbox.checked) {
-        //         enableFields(documento);
-        //     } else {
-        //         disableFields(documento);
-        //     }
-        // }
-
-        // function disableFields(container) {
-        //     const inputs = container.querySelectorAll('input, select, textarea');
-        //     inputs.forEach(input => {
-        //         input.disabled = true;
-        //     });
-        // }
-
-        // function enableFields(container) {
-        //     const inputs = container.querySelectorAll('input, select, textarea');
-        //     inputs.forEach(input => {
-        //         input.disabled = false;
-        //     });
-        // }
-
-        // const estrangeiroCheckbox = document.getElementById('estrangeiro');
-        // const documentoEstrangeiro = document.getElementById('documento_estrangeiro');
-
-        // estrangeiroCheckbox.addEventListener('change', function() {
-        //     if (this.checked) {
-        //         enableFields(documentoEstrangeiro);
-        //     } else {
-        //         disableFields(documentoEstrangeiro);
-        //     }
-        // });
-
-        // const estrangeiroCheckbox2 = document.getElementById('estrangeiro_checkbox');
-        // const documentoEstrangeiro2 = document.getElementById('documento_estrangeiro2');
-
-        // estrangeiroCheckbox2.addEventListener('change', function() {
-        //     if (this.checked) {
-        //         enableFields(documentoEstrangeiro2);
-        //     } else {
-        //         disableFields(documentoEstrangeiro2);
-        //     }
-        // });
-    </script>
-    
-
-    <body>
-        <div class="container">
-            <h2 class="damage-title">Danos no Veículo</h2>
-    
-            <div class="damage-checkbox">
-                <input type="checkbox" id="seguranca_checkbox" name="seguranca_checkbox" onchange="toggleDamageContainer()">
-                <label for="seguranca_checkbox" class="checkbox-label">Houve danos ao sistema de segurança, freios, direção ou de suspensão do veículo?</label>
-            </div>
-            
-            <div class="damage-container" id="damageContainer">
-                <div class="damage-button" onclick="toggleSelected(1)">Dianteira Direita</div>
-                <div class="damage-button" onclick="toggleSelected(2)">Dianteira Esquerda</div>
-                <div class="damage-button" onclick="toggleSelected(3)">Lateral/Teto Direito</div>
-                <div class="damage-button" onclick="toggleSelected(4)">Lateral/Teto Esquerdo</div>
-                <div class="damage-button" onclick="toggleSelected(5)">Traseira Direita</div>
-                <div class="damage-button" onclick="toggleSelected(6)">Traseira Esquerda</div>
-            </div>
-        </div>
-
-            
-    
-        <div class="cargo-damage-container">
-            <h2>Danos na Carga do Veículo</h2>
-            <div class="form-group">
-                <input type="checkbox" id="carga_checkbox" name="carga_checkbox">
-                <label for="carga_checkbox" class="checkbox-label">Houve danos na carga do veículo?</label>
-            </div>
-            <div class="form-group">
-                <label for="notas_fiscais" class="form-label">Nº das Notas Fiscais, Manifestos ou Equivalentes:</label>
-                <input type="text" id="notas_fiscais" name="notas_fiscais" disabled>
-            </div>
-            <div class="form-group">
-                <label for="tipo_mercadoria" class="form-label">Tipo de Mercadoria:</label>
-                <input type="text" id="tipo_mercadoria" name="tipo_mercadoria" disabled>
-            </div>
-            <div class="form-group">
-                <label for="valor_total" class="form-label">Valor Total:</label>
-                <input type="text" id="valor_total" name="valor_total" disabled>
-            </div>
-            <div class="form-group">
-                <label for="extensao_danos" class="form-label">Extensão estimada dos danos da carga:</label>
-                <input type="text" id="extensao_danos" name="extensao_danos" disabled>
-            </div>
-            <div class="form-group">
-                <input type="checkbox" id="seguro_checkbox" name="seguro_checkbox">
-                <label for="seguro_checkbox" class="checkbox-label">Tem seguro?</label>
-            </div>
-            <div class="form-group">
-                <label for="seguradora" class="form-label">Informe a Seguradora:</label>
-                <input type="text" id="seguradora" name="seguradora" disabled>
-            </div>
-            <div class="form-actions">
-                <button type="button" onclick="window.location.href = 'form1.html'">voltar</button>
-                <button type="button" onclick="saveFormData()">Enviar</button>
-            </div>
-
-        </div>
+ 
         <script>
                 document.getElementById('estrangeiro_checkbox').addEventListener('change', function() {
                     var documentoEstrangeiroDiv = document.getElementById('documento_estrangeiro2');
@@ -643,27 +582,56 @@
             });
 
             function saveFormData() {
+            var mainVehicleForm = document.querySelector('#main-vehicle-form');
+            var driverForm = document.querySelector('#driver-form')
             const selectedButtons = document.querySelectorAll('.damage-button.selected');
+
             const selectedParts = Array.from(selectedButtons).map(button => button.textContent);
-            // console.log('Partes selecionadas:', selectedParts);
-            
-            var formElement = document.querySelector('form');
-            var formData = new FormData(formElement);
 
-            const formData2 = {};
+            console.log('Partes selecionadas:', selectedParts);
 
-            formData.forEach((value, key) => {
-                formData2[key] = value;
-            });
+            const mainVehicleFormData = new FormData(mainVehicleForm)
+            const driverFormData = new FormData(driverForm)
+        
+            const formData = {
+                main_vehicle: {},
+                driver: {}
+            }
 
-            formData2['selectedParts'] = selectedParts;
+            mainVehicleFormData.forEach((value, key) => {
+                formData.main_vehicle[key] = value
+            })
+            driverFormData.forEach((value, key) => {
+                formData.driver[key] = value
+            })
 
-            sessionStorage.setItem('formData2', JSON.stringify(formData2));
-            console.log('Dados do segundo formulário:', formData2);
+            formData['selectedParts'] = selectedParts;
+
+            sessionStorage.setItem('formData2', JSON.stringify(formData));
+            console.log('Dados do segundo formulário:', formData);
             // window.location.href = 'form3.html';
-
         }
+        // function saveFormData() {
+        //     const selectedButtons = document.querySelectorAll('.damage-button.selected');
+        //     const selectedParts = Array.from(selectedButtons).map(button => button.textContent);
+        //     // console.log('Partes selecionadas:', selectedParts);
+            
+        //     var formElement = document.querySelector('form');
+        //     var formData = new FormData(formElement);
 
+        //     const formData2 = {};
+
+        //     formData.forEach((value, key) => {
+        //         formData2[key] = value;
+        //     });
+
+        //     formData2['selectedParts'] = selectedParts;
+
+        //     sessionStorage.setItem('formData2', JSON.stringify(formData2));
+        //     console.log('Dados do segundo formulário:', formData2);
+        //     // window.location.href = 'form3.html';
+
+        // }
             const cargaCheckbox = document.getElementById('carga_checkbox');
             const notasFiscaisInput = document.getElementById('notas_fiscais');
             const tipoMercadoriaInput = document.getElementById('tipo_mercadoria');
