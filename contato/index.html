@@ -6,6 +6,21 @@
     <title>Defesa Prévia DEMUTRAN</title>
     <link rel="stylesheet" href="../pages css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .feedback {
+            padding: 10px;
+            margin-top: 10px;
+            display: none;
+        }
+        .feedback.success {
+            color: green;
+            border: 1px solid green;
+        }
+        .feedback.error {
+            color: red;
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
     <div class="feedback" id="feedback"></div>
@@ -40,7 +55,7 @@
         <p><i class="fas fa-phone-alt"></i> Telefone: (84) 3521-6650</p>
         <p><i class="fab fa-whatsapp"></i> Whatsapp: (84) 9944-0704</p>
         <p><i class="far fa-envelope"></i> E-mail: DEMUTRAN@macau.gov.rn.br</p>
-        <form action="processa_formulario.php" method="post">
+        <form id="contatoForm" method="post">
             <label for="nome"><i class="fas fa-user"></i> Seu nome:</label>
             <input type="text" id="nome" name="nome" required>
             <label for="telefone"><i class="fas fa-phone"></i> Telefone Para Contato:</label>
@@ -51,8 +66,9 @@
             <input type="text" id="assunto" name="assunto" required>
             <label for="mensagem"><i class="fas fa-comment"></i> Sua mensagem (opcional):</label>
             <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..."></textarea>
-            <input type="submit" value="Enviar">
+            <button type="button" onclick="submitForm()">Enviar</button>
         </form>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
