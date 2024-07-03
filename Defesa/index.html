@@ -80,7 +80,7 @@
     <div class="form-container">
         <h2><i class="far fa-edit"></i><span> Solicitação DEMUTRAN</span></h2>
         <p style="padding-bottom: 40px;"><strong>Preencha todos os dados para podermos dar continuidade a sua solicitação.</strong></p>
-        <form id="solicitacaoForm" action="submit.php" method="post" enctype="multipart/form-data">
+        <form id="DefesaForm" method="post" enctype="multipart/form-data">
             <div class="input-field">
                 <select id="tipo_solicitacao" name="tipo_solicitacao" required>
                     <option value="" disabled selected></option>
@@ -161,12 +161,13 @@
                 <input type="file" id="notif_DEMUTRAN" name="notif_DEMUTRAN">
                 <label for="notif_DEMUTRAN"><i class="far fa-file"></i> Anexar NOTIFICAÇÃO DEMUTRAN (preenchida e assina):</label>
                 <div class="underline"></div>
-                <button style="margin-top: 5px;" type="submit">Enviar</button>
+                <button style="margin-top: 5px;" onclick="submitForm()" type="submit">Enviar</button>
 
             </div>
         </form>
     </div>
     <script>
+        
         document.getElementById('tipo_solicitacao').addEventListener('change', function() {
             var formNormal = document.getElementById('form_normal');
             var notifDEMUTRANField = document.getElementById('notif_DEMUTRAN_field');
@@ -179,35 +180,51 @@
                 notifDEMUTRANField.style.display = 'none';
             }
         });
-
-        document.getElementById('solicitacaoForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio do formulário
-
-            var formData = new FormData(this); // Cria um objeto FormData com os dados do formulário
-            var formObj = {};
-
-            formData.forEach(function(value, key) {
-                formObj[key] = value;
-            });
-
-            fetch('submit.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formObj)
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.status === 'success') {
-                      alert('Formulário enviado com sucesso!');
-                  } else {
-                      alert('Erro ao enviar o formulário.');
-                  }
-              }).catch(error => {
-                  console.error('Erro:', error);
-                  alert('Erro ao enviar o formulário.');
-              });
+        document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("DefesaForm");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            submitForm();
         });
+    });
+
+    function submitForm() {
+    const form = document.getElementById("DefesaForm");
+    const formData = new FormData(form);
+
+    fetch("processa_formulario.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        const feedback = document.getElementById("feedback");
+        feedback.innerHTML = data;
+        feedback.classList.add("success");
+        feedback.classList.remove("error");
+        feedback.style.display = "block";
+        
+        setTimeout(() => {
+            feedback.style.display = "none";
+        }, 3000);
+    })
+    .catch(error => {
+        const feedback = document.getElementById("feedback");
+        feedback.innerHTssh-rsa
+        ML = "Ocorreu um erro ao enviar o formulário.";
+        feedback.classList.add("error");
+        feedback.classList.remove("success");
+        feedback.style.display = "block";
+        
+        setTimeout(() => {
+            feedback.style.display = "none";
+        }, 3000);
+
+        
+        console.error("Erro:", error);
+    });
+}
+
     </script>
 </body>
 </html>
