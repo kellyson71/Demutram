@@ -18,16 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : null;
 
     $upload_dir = 'midia/';
+    $base_url = "https://demutran.protocolosead.com/Defesa/";
 
-    $doc_requerimento_url = uploadFile('doc_requerimento', $upload_dir);
-    $cnh_url = uploadFile('cnh', $upload_dir);
-    $cnh_condutor_url = uploadFile('cnh_condutor', $upload_dir);
-    $notif_demutran_url = uploadFile('notif_DEMUTRAN', $upload_dir);
-    $crlv_url = uploadFile('crlv', $upload_dir);
-    $comprovante_residencia_url = uploadFile('comprovante_residencia', $upload_dir);
-    $doc_complementares_urls = uploadMultipleFiles('doc_complementares', $upload_dir);
+    $doc_requerimento_url = uploadFile('doc_requerimento', $upload_dir, $base_url);
+    $cnh_url = uploadFile('cnh', $upload_dir, $base_url);
+    $cnh_condutor_url = uploadFile('cnh_condutor', $upload_dir, $base_url);
+    $notif_demutran_url = uploadFile('notif_DEMUTRAN', $upload_dir, $base_url);
+    $crlv_url = uploadFile('crlv', $upload_dir, $base_url);
+    $comprovante_residencia_url = uploadFile('comprovante_residencia', $upload_dir, $base_url);
+    $doc_complementares_urls = uploadMultipleFiles('doc_complementares', $upload_dir, $base_url);
 
-    $sql = "INSERT INTO solicitacao_demutram (tipo_solicitacao, nome, telefone, email, assunto, descricao, doc_requerimento_url, cnh_url, cnh_condutor_url, notif_demutran_url, crlv_url, comprovante_residencia_url, doc_complementares_urls) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO solicitacao_demutran (tipo_solicitacao, nome, telefone, email, assunto, descricao, doc_requerimento_url, cnh_url, cnh_condutor_url, notif_demutran_url, crlv_url, comprovante_residencia_url, doc_complementares_urls) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssssssssss", $tipo_solicitacao, $nome, $telefone, $email, $assunto, $descricao, $doc_requerimento_url, $cnh_url, $cnh_condutor_url, $notif_demutran_url, $crlv_url, $comprovante_residencia_url, $doc_complementares_urls); 
@@ -43,18 +44,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 
-function uploadFile($file_key, $upload_dir) {
+function uploadFile($file_key, $upload_dir, $base_url) {
     if (isset($_FILES[$file_key]) && $_FILES[$file_key]['error'] === UPLOAD_ERR_OK) {
         $file_name = basename($_FILES[$file_key]['name']);
         $target_path = $upload_dir . $file_name;
         if (move_uploaded_file($_FILES[$file_key]['tmp_name'], $target_path)) {
-            return $target_path;
+            return $base_url . $target_path;
         }
     }
     return null;
 }
 
-function uploadMultipleFiles($file_key, $upload_dir) {
+function uploadMultipleFiles($file_key, $upload_dir, $base_url) {
     $urls = [];
     if (isset($_FILES[$file_key])) {
         foreach ($_FILES[$file_key]['tmp_name'] as $key => $tmp_name) {
@@ -62,7 +63,7 @@ function uploadMultipleFiles($file_key, $upload_dir) {
                 $file_name = basename($_FILES[$file_key]['name'][$key]);
                 $target_path = $upload_dir . $file_name;
                 if (move_uploaded_file($tmp_name, $target_path)) {
-                    $urls[] = $target_path;
+                    $urls[] = $base_url . $target_path;
                 }
             }
         }
