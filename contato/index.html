@@ -7,19 +7,37 @@
     <link rel="stylesheet" href="../pages css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        .feedback {
-            padding: 10px;
-            margin-top: 10px;
-            display: none;
+        button[type="button"] {
+            background-color: #009640;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
-        .feedback.success {
-            color: green;
-            border: 1px solid green;
+
+        button[type="button"]:hover {
+            background-color: #0056b3;
         }
-        .feedback.error {
-            color: red;
-            border: 1px solid red;
-        }
+.feedback {
+    color: white;
+    background-color: #28a745;
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translate(-50%, -200%);
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+    animation: feedbackSlideDown 0.5s forwards;
+}
+
+@keyframes feedbackSlideDown {
+    to { transform: translate(-50%, 0); }
+}
+
     </style>
 </head>
 <body>
@@ -67,6 +85,7 @@
             <label for="mensagem"><i class="fas fa-comment"></i> Sua mensagem (opcional):</label>
             <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..."></textarea>
             <button type="button" onclick="submitForm()">Enviar</button>
+
         </form>
     </div>
     <script src="script.js"></script>
