@@ -324,8 +324,9 @@ nav ul li a img {
 
                 <div class="form-group">
                     <label for="accidentCity">Cidade *</label>
-                    <input type="text" id="accidentCity" name="accidentCity" value="Pau dos Ferros" required disabled>
-                    
+                    <input type="text" id="accidentCity" name="accidentCity" value="Pau dos Ferros" required>
+                </div>
+
                 <div class="form-group">
                     <label for="accidentState">UF *</label>
                     <input type="text" id="accidentState" name="accidentState" value="RN" required>
@@ -415,8 +416,6 @@ nav ul li a img {
                 const formData = new FormData(form);
                 const formObject = {};
 
-                formObject['relation'] = document.getElementById('relation').value;
-
                 formData.forEach((value, key) => {
                     formObject[key] = value;
                 });
@@ -434,9 +433,7 @@ nav ul li a img {
                     field.required = foreignCheckbox.checked;
                 });
             }
-
         </script>
-        
         <script src="scripts.js"></script>
 </body>
 </html>

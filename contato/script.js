@@ -22,23 +22,23 @@ function submitForm() {
         feedback.classList.remove("error");
         feedback.style.display = "block";
         
+        // Ocultar mensagem após 2 segundos
         setTimeout(() => {
             feedback.style.display = "none";
-        }, 3000);
+        }, 2000);
     })
     .catch(error => {
         const feedback = document.getElementById("feedback");
-        feedback.innerHTssh-rsa
-        ML = "Ocorreu um erro ao enviar o formulário.";
+        feedback.innerHTML = "Ocorreu um erro ao enviar o formulário.";
         feedback.classList.add("error");
         feedback.classList.remove("success");
         feedback.style.display = "block";
         
+        // Ocultar mensagem após 3 segundos
         setTimeout(() => {
             feedback.style.display = "none";
         }, 3000);
 
-        
         console.error("Erro:", error);
     });
 }
