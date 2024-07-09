@@ -190,14 +190,14 @@
         function submitForm() {
             const form = document.getElementById("DefesaForm");
             const formData = new FormData(form);
+            console.log(formData.entries());
             
-            // Check if all uploaded files are PDFs
             for (let [key, value] of formData.entries()) {
-                if (value instanceof File && value.type !== "application/pdf") {
-                    alert("Todos os arquivos devem estar no formato PDF.");
-                    return;
-                }
+            if (value instanceof File && value.name !== "" && value.type !== "application/pdf") {
+                alert("Todos os arquivos devem estar no formato PDF.");
+                return;
             }
+        }
 
             fetch("processa_formulario.php", {
                 method: "POST",
