@@ -428,6 +428,7 @@ textarea:focus ~ .underline {
                 <li><a href="https://wa.me/558499440704"><img src="../assets/copy-url.png" alt="Instagram"></a></li>
             </ul>
         </nav>
+
     </header>
     <div class="topbar-secondary">
         <div class="container_bar">
@@ -439,7 +440,7 @@ textarea:focus ~ .underline {
     <div class="form-container">
         <h2><i class="far fa-id-card"></i><span> Cartão Vaga Especial – PCD/Idoso</span></h2>
         <p>Preencha todos os dados para podermos dar continuidade a sua solicitação.</p>
-        <form id="solicitacaoForm" action="#" method="post" enctype="multipart/form-data">
+        <form id="SoliForm" method="post" enctype="multipart/form-data">
             <div class="align-checkbox">
                 <input type="checkbox" id="resident_check" name="resident_check" required>
                 <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; color: #6C757D; ">Eu sou residente de Pau dos Ferros</h6>
@@ -565,52 +566,77 @@ textarea:focus ~ .underline {
                 </div>
                 <div class="input-field">
                     <input type="file" id="doc_identidade_representante" name="doc_identidade_representante" disabled>
-                    <label for="doc_identidade_representante"><i class="far fa-id-card"></i> Anexar Identidade (Frente e Verso):</label>
+                    <label style="background-color: #f6f6f6;" for="doc_identidade_representante"><i class="far fa-id-card"></i> ADICIONAR FOTO DE DOCUMENTO DE IDENTIFICAÇÃO COM FOTO:</label>
                     <div class="underline"></div>
                 </div>
                 <div class="input-field">
                     <input type="file" id="proc_comprovante" name="proc_comprovante" disabled>
-                    <label for="proc_comprovante"><i class="far fa-address-card"></i> Anexar Procuração:</label>
+                    <label style="background-color: #f6f6f6;" for="proc_comprovante"><i class="fas fa-file-alt"></i> ENVIAR COMPROVANTE DE PROCURAÇÃO COMO REPRESENTANTE LEGAL:</label>
                     <div class="underline"></div>
                 </div>
             </div>
-            <button type="submit">Enviar</button>
+
+            <button onclick="submitForm()" type="submit">Enviar</button>
         </form>
     </div>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
     <script>
         function toggleLegalRepresentative() {
-            const isChecked = document.getElementById('representante_legal_check').checked;
-            document.getElementById('nome_representante').disabled = !isChecked;
-            document.getElementById('cpf_representante').disabled = !isChecked;
-            document.getElementById('endereco_representante').disabled = !isChecked;
-            document.getElementById('telefone_representante').disabled = !isChecked;
-            document.getElementById('email_representante').disabled = !isChecked;
-            document.getElementById('doc_identidade_representante').disabled = !isChecked;
-            document.getElementById('proc_comprovante').disabled = !isChecked;
+            var isChecked = document.getElementById('representante_legal_check').checked;
+            var inputs = document.querySelectorAll('#representante_legal_section input');
+            inputs.forEach(input => {
+                input.disabled = !isChecked;
+            });
         }
 
-        document.getElementById('solicitacaoForm').addEventListener('submit', function(event) {
-            event.preventDefault();
 
-            var formData = new FormData(this);
-
-            fetch('processar_formulario.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('feedback').textContent = data.message;
-                if(data.success) {
-                    document.getElementById('solicitacaoForm').reset();
-                }
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-                document.getElementById('feedback').textContent = 'Erro ao enviar o formulário.';
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("SoliForm");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                submitForm();
             });
         });
+
+        function submitForm() {
+            const form = document.getElementById("SoliForm");
+            const formData = new FormData(form);
+            
+            for (let [key, value] of formData.entries()) {
+                if (value instanceof File && value.type !== "application/pdf") {
+                    alert("Todos os arquivos devem estar no formato PDF.");
+                    return;
+                }
+            }
+
+            fetch("processa_formulario.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                const feedback = document.getElementById("feedback");
+                feedback.innerHTML = data;
+                feedback.classList.add("success");
+                feedback.classList.remove("error");
+                feedback.style.display = "block";
+                
+                setTimeout(() => {
+                    feedback.style.display = "none";
+                }, 30000);
+            })
+            .catch(error => {
+                const feedback = document.getElementById("feedback");
+                feedback.innerHTML = "Ocorreu um erro ao enviar o formulário.";
+                feedback.classList.add("error");
+                feedback.classList.remove("success");
+                feedback.style.display = "block";
+                
+                setTimeout(() => {
+                    feedback.style.display = "none";
+                }, 30000);
+            });
+        }
     </script>
 </body>
 </html>
