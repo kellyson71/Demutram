@@ -223,10 +223,12 @@
                 feedback.style.display = "block";
                 
                 setTimeout(() => {
-                    feedback.style.display = "none";
-                }, 30000);
+                    const feedback = document.getElementById("feedback");
+                    feedback.style.display = "block";
+                }, 0);           input.disabled = !isChecked;
             });
         }
+
     </script>
 </body>
 </html>

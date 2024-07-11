@@ -1,0 +1,406 @@
+:root {
+    --gray-1: #CED4DA;
+    --gray-2: #6C757D;
+    --blue-1: #0DCAF0;
+    --blue-2: #f5faff;
+    --background: #f5faff;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+}
+
+.feedback {
+    color: white;
+    background-color: #28a745;
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translate(-50%, -200%);
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+    animation: feedbackSlideDown 0.5s forwards;
+    z-index: 9999; 
+}
+
+@keyframes feedbackSlideDown {
+    to { transform: translate(-50%, 0); }
+}
+
+
+header {
+    background: linear-gradient(90deg, #009640, #00C851);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+header ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li a img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s;
+}
+
+header nav ul li a img:hover {
+    transform: scale(1.2);
+}
+
+header p {
+    color: white;
+    font-size: 16px;
+}
+
+header button {
+    color: white;
+    font-size: 20px;
+    border: none;
+    background: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+header button:hover {
+    color: #00C851;
+    transform: scale(1.1);
+}
+
+.topbar-secondary {
+    background-color: #f2f2f2;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    top: 60px;
+    z-index: 999;
+}
+
+.topbar-secondary .container_bar {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.topbar-secondary a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.topbar-secondary a:hover {
+    color: #666;
+}
+
+.topbar-secondary .separator {
+    color: #666;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    margin: 160px auto 20px auto; 
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: #999;
+    pointer-events: none;
+    transition: top 0.3s, font-size 0.3s, color 0.3s;
+
+}
+
+input:focus ~ label,
+input:valid ~ label,
+textarea:focus ~ label,
+textarea:valid ~ label {
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+    color: #00C851;
+}
+
+.underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #00C851;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+input:focus ~ .underline,
+textarea:focus ~ .underline {
+    transform: scaleX(1);
+}
+
+button {
+    background-color: #00C851;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: #009640;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+    background: none;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+}
+
+select {
+    position: relative;
+    padding-right: 30px;
+    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon fill="%23009640" points="5,7 10,12 15,7"/></svg>') no-repeat right center;
+    background-size: 15px;
+}
+
+select:focus {
+    border-bottom: 1px solid #00C851;
+}
+
+select:focus ~ .underline,
+input:focus ~ .underline,
+textarea:focus ~ .underline {
+    transform: scaleX(1);
+}
+
+
+.input-field {
+    position: relative;
+}
+
+.input-field select {
+    background-position: calc(100% - 10px) center;
+}
+
+
+input:focus ~ label,
+input:valid ~ label,
+textarea:focus ~ label,
+textarea:valid ~ label,
+select:focus ~ label,
+select:valid ~ label {
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+    color: #00C851;
+}
+
+.underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #00C851;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+h3 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+
+input[type="checkbox"] {
+    -webkit-appearance: checkbox; 
+    -moz-appearance: checkbox; 
+    appearance: checkbox; 
+    width: auto; 
+    height: auto; 
+    margin: 0; 
+    padding: 0; 
+    border: none; 
+    background: none; 
+}
+
+input[type="file"]:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    color: #999;
+    pointer-events: none;
+    transition: top 0.3s, font-size 0.3s, color 0.3s;
+    margin-top: 8px;
+}
+
+input:focus ~ label,
+input:valid ~ label,
+textarea:focus ~ label,
+textarea:valid ~ label {
+    top: -20px;
+    left: 0;
+    font-size: 12px;
+    color: #00C851;
+}
+.custom-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333; 
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 3px;
+    margin-left: 20px;
+}
+.custom-label i {
+    margin-right: 8px;
+    color: #555;
+}
+.input-field {
+    margin-bottom: 20px;
+}
+input:disabled {
+    opacity: 0.6;
+    background-color: #f0f0f0;
+    color: #888;
+}
+.underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #00C851;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+input:focus ~ .underline,
+textarea:focus ~ .underline {
+    transform: scaleX(1);
+}
+.align-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.align-checkbox input[type="checkbox"] {
+    margin: 0 8px 0 0;
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%;
+    }
+
+    header {
+        padding: 0 16px;
+    }
+
+    .topbar-secondary .container_bar {
+        padding: 0 16px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}
