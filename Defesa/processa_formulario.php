@@ -8,7 +8,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tipo_solicitacao = $_POST['tipo_solicitacao'];
     $nome = $_POST['nome'];
