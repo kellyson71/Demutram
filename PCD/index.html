@@ -34,11 +34,13 @@ body {
     border-radius: 8px;
     display: none;
     animation: feedbackSlideDown 0.5s forwards;
+    z-index: 9999; /* Make it appear on top of other elements */
 }
 
 @keyframes feedbackSlideDown {
     to { transform: translate(-50%, 0); }
 }
+</style>
 
 header {
     background: linear-gradient(90deg, #009640, #00C851);
@@ -442,11 +444,11 @@ textarea:focus ~ .underline {
         <p>Preencha todos os dados para podermos dar continuidade a sua solicitação.</p>
         <form id="SoliForm" method="post" enctype="multipart/form-data">
             <div class="align-checkbox">
-                <input type="checkbox" id="resident_check" name="resident_check" required>
+                <input type="checkbox" id="resident_check" name="resident_check" >
                 <h6 style="font-size: 15px; font-family: 'Roboto', sans-serif; color: #6C757D; ">Eu sou residente de Pau dos Ferros</h6>
             </div>
             <div class="input-field">
-                <select id="tipo_solicitacao" name="tipo_solicitacao" required>
+                <select id="tipo_solicitacao" name="tipo_solicitacao" >
                     <option value="" disabled selected></option>
                     <option value="idoso">PARA IDOSO</option>
                     <option value="pcd">PARA PESSOA COM DEFICIÊNCIA (PCD)</option>
@@ -456,7 +458,7 @@ textarea:focus ~ .underline {
             </div>
         
             <div class="input-field">
-                <select id="emissao_cartao" name="emissao_cartao" required>
+                <select id="emissao_cartao" name="emissao_cartao" >
                     <option value="" disabled selected></option>
                     <option value="inicial">INICIAL</option>
                     <option value="renovacao">RENOVAÇÃO</option>
@@ -467,7 +469,7 @@ textarea:focus ~ .underline {
             </div>
         
             <div class="input-field">
-                <select id="solicitante" name="solicitante" required>
+                <select id="solicitante" name="solicitante" >
                     <option value="" disabled selected></option>
                     <option value="requerente">REQUERENTE</option>
                     <option value="representante_legal">REPRESENTANTE LEGAL</option>
@@ -478,38 +480,38 @@ textarea:focus ~ .underline {
 
             
             <div class="input-field">
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome" >
                 <label for="nome"><i class="fas fa-user"></i> Seu nome:</label>
                 <div class="underline"></div>
             </div>
             <div class="input-field">
-                <input  type="date" id="data_nascimento" name="data_nascimento" required>
+                <input  type="date" id="data_nascimento" name="data_nascimento" >
                 <label style="background-color: white;" for="data_nascimento"><i class="fas fa-calendar"></i> Data de Nascimento:</label>
                 <div class="underline"></div>
             </div>
             <div class="input-field">
-                <input type="text" id="cpf" name="cpf" required>
+                <input type="text" id="cpf" name="cpf" >
                 <label for="cpf"><i class="fas fa-id-card"></i> CPF:</label>
                 <div class="underline"></div>
             </div>
             <div class="input-field">
-                <input type="text" id="endereco" name="endereco" required>
+                <input type="text" id="endereco" name="endereco" >
                 <label for="endereco"><i class="fas fa-home"></i> ENDEREÇO:</label>
                 <div class="underline"></div>
             </div>
             <div class="input-field">
-                <input type="tel" id="telefone" name="telefone" required>
+                <input type="tel" id="telefone" name="telefone" >
                 <label for="telefone"><i class="fas fa-phone"></i> Numero de Telefone/Celular:</label>
                 <div class="underline"></div>
             </div>
             
             <div class="input-field">
-                <input type="text" id="doc_identidade_num" name="doc_identidade_num" required>
+                <input type="text" id="doc_identidade_num" name="doc_identidade_num" >
                 <label for="doc_identidade_num"><i class="far fa-id-card"></i> DOCUMENTO DE IDENTIDADE N°:</label>
                 <div class="underline"></div>
             </div>
             <div class="input-field">
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" >
                 <label for="email"><i class="fas fa-envelope"></i> Seu e-mail:</label>
                 <div class="underline"></div>
             </div>
@@ -576,7 +578,7 @@ textarea:focus ~ .underline {
                 </div>
             </div>
 
-            <button onclick="submitForm()" type="submit">Enviar</button>
+            <button type="submit">Enviar</button>
         </form>
     </div>
 
@@ -608,11 +610,13 @@ textarea:focus ~ .underline {
                 return;
             }
         }
+>>>>>>>>> Temporary merge branch 2
             fetch("processa_formulario.php", {
                 method: "POST",
                 body: formData
             })
             .then(response => response.text())
+            
             .then(data => {
                 const feedback = document.getElementById("feedback");
                 feedback.innerHTML = data;
@@ -624,6 +628,7 @@ textarea:focus ~ .underline {
                     feedback.style.display = "none";
                 }, 30000);
             })
+
             .catch(error => {
                 const feedback = document.getElementById("feedback");
                 feedback.innerHTML = "Ocorreu um erro ao enviar o formulário.";

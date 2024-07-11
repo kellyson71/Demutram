@@ -31,17 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $doc_identidade_url = uploadFile('doc_identidade', $upload_dir, $base_url);
     $comprovante_residencia_url = uploadFile('comprovante_residencia', $upload_dir, $base_url);
-    $laudo_medico_url = uploadFile('laudo_medico', $upload_dir, $base_url);
-
-    $representante_legal = getPostValue('representante_legal', 0);
-    $nome_representante = getPostValue('nome_representante');
-    echo $nome_representante;
-    $cpf_representante = getPostValue('cpf_representante');
-    $endereco_representante = getPostValue('endereco_representante');
-    $telefone_representante = getPostValue('telefone_representante');
-    $email_representante = getPostValue('email_representante');
-    $doc_identidade_representante_url = uploadFile('doc_identidade_representante', $upload_dir, $base_url);
-    $proc_comprovante_url = uploadFile('proc_comprovante', $upload_dir, $base_url);
+    $doc_complementares_urls = uploadMultipleFiles('doc_complementares', $upload_dir, $base_url);
 
     $sql = "INSERT INTO solicitacao_cartao (residente, tipo_solicitacao, emissao_cartao, solicitante, nome, data_nascimento, cpf, endereco, telefone, doc_identidade_num, email, doc_identidade_url, comprovante_residencia_url, laudo_medico_url, representante_legal, nome_representante, cpf_representante, endereco_representante, telefone_representante, email_representante, doc_identidade_representante_url, proc_comprovante_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
