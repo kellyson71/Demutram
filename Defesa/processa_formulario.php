@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sssssssssssss", $tipo_solicitacao, $nome, $telefone, $email, $assunto, $descricao, $doc_requerimento_url, $cnh_url, $cnh_condutor_url, $notif_demutran_url, $crlv_url, $comprovante_residencia_url, $doc_complementares_urls); 
 
     if ($stmt->execute()) {
-        echo "Mensagem enviada com sucesso!";
+        echo "Mensagem enviada com!";
     } else {
         echo "Erro: " . $sql . "<br>" . $conn->error;
     }
